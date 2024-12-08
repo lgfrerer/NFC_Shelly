@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelly Toggle</title>
+    <script>
+        async function toggleShelly() {
+            const url = "https://shelly-85-eu.shelly.cloud/device/relay/control";
+            const data = {
+                channel: 0,
+                turn: "toggle",
+                id: "B8D61A86CD74",
+                auth_key: "MWRmMDJjdWlk6EFF949C48CE4BD1BEE4346453B8CA1973304E093765F5C20DBEC1DFFD727FCBA2098CEA01E70DEE"
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: new URLSearchParams(data)
+                });
+
+                if (response.ok) {
+                    alert("Shelly toggled successfully!");
+                } else {
+                    alert("Failed to toggle Shelly. Please check the details.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred while toggling Shelly.");
+            }
+        }
+
+        window.onload = toggleShelly;
+    </script>
+</head>
+<body>
+    <h1>Shelly Toggle</h1>
+    <p>Attempting to toggle Shelly...</p>
+</body>
+</html>
